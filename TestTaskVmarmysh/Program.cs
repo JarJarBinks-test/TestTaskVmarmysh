@@ -1,4 +1,3 @@
-using Microsoft.OpenApi.Models;
 using System.Reflection;
 using TestTaskVmarmysh.Filters;
 using TestTaskVmarmysh.Services;
@@ -20,7 +19,7 @@ namespace TestTaskVmarmysh
             builder.Services.AddControllers((options) => {
                 options.Filters.Add<AppExceptionFilter>();
             });
-            builder.Services.AddServices();
+            builder.Services.AddServices(builder.Configuration);
             builder.Services.AddSwaggerGen(setupAction =>
             {
                 var xmlDocumentationFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";

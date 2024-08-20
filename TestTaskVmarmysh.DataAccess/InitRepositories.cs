@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using TestTaskVmarmysh.DataAccess.Context;
 using TestTaskVmarmysh.DataAccess.Interfaces;
 using TestTaskVmarmysh.DataAccess.Repositories;
@@ -13,12 +15,19 @@ namespace TestTaskVmarmysh.DataAccess
         /// <summary>
         /// Add repositories and contexts to services collections.
         /// </summary>
-        /// <param name="services">Service collection.</param>
-        public static void AddRepositories(this IServiceCollection services)
+        /// <param name="services">Services collection.</param>
+        /// <param name="configuration">Configuration.</param>
+        public static void AddRepositories(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddDbContext<TreeContext>();
-            services.AddDbContext<JournalContext>();
-            services.AddDbContext<PartnerContext>();
+            services.AddDbContext<TreeContext>((ob) => {
+                ob.UseSqlServer(configuration.GetConnectionString("TreeContextConnectionString") ?? throw new Exception("TreeContextConnectionString not defined"));
+            });
+            services.AddDbContext<JournalContext>((ob) => {
+                ob.UseSqlServer(configuration.GetConnectionString("JournalContextConnectionString") ?? throw new Exception("JournalContextConnectionString not defined"));
+            });
+            services.AddDbContext<PartnerContext>((ob) => {
+                ob.UseSqlServer(configuration.GetConnectionString("PartnerContextConnectionString") ?? throw new Exception("PartnerContextConnectionString not defined"));
+            });
 
             services.AddScoped<ITreeRepository, TreeRepository>();
             services.AddScoped<IJournalRepository, JournalRepository>();

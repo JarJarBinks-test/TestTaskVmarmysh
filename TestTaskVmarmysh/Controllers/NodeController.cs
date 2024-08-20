@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using TestTaskVmarmysh.Services.Interfaces;
 
 namespace TestTaskVmarmysh.Controllers
@@ -32,7 +33,7 @@ namespace TestTaskVmarmysh.Controllers
         /// <param name="token">The cancellation token.</param>
         /// <returns>Create task.</returns>
         [HttpPost("api.user.tree.node.create")]
-        public Task Create([FromQuery] string treeName, [FromQuery] int parentNodeId, [FromQuery] string nodeName, CancellationToken token)
+        public Task Create([FromQuery, Required] string treeName, [FromQuery] int? parentNodeId, [FromQuery, Required] string nodeName, CancellationToken token)
         {
             // TODO: Need remove parameter treeName. Not used.
             _logger.LogInformation($"{nameof(Create)}. {nameof(treeName)}={treeName}, {nameof(parentNodeId)}={parentNodeId}, {nameof(nodeName)}={nodeName}.");
@@ -48,7 +49,7 @@ namespace TestTaskVmarmysh.Controllers
         /// <param name="token">The cancellation token.</param>
         /// <returns>Create task.</returns>
         [HttpPost("api.user.tree.node.rename")]
-        public Task Rename([FromQuery] string treeName, [FromQuery] int nodeId, [FromQuery] string newNodeName, CancellationToken token)
+        public Task Rename([FromQuery, Required] string treeName, [FromQuery, Required] int nodeId, [FromQuery, Required] string newNodeName, CancellationToken token)
         {
             // TODO: Need remove parameter treeName. Not used.
             _logger.LogInformation($"{nameof(Rename)}. {nameof(treeName)}={treeName}, {nameof(nodeId)}={nodeId}, {nameof(newNodeName)}={newNodeName}.");
@@ -63,7 +64,7 @@ namespace TestTaskVmarmysh.Controllers
         /// <param name="token">The cancellation token.</param>
         /// <returns>Create task.</returns>
         [HttpPost("api.user.tree.node.delete")]
-        public Task Delete([FromQuery] string treeName, [FromQuery] int nodeId, CancellationToken token)
+        public Task Delete([FromQuery, Required] string treeName, [FromQuery, Required] int nodeId, CancellationToken token)
         { 
             // TODO: Need remove parameter treeName. Not used.
             _logger.LogInformation($"{nameof(Delete)}. {nameof(treeName)}={treeName}, {nameof(nodeId)}={nodeId}.");

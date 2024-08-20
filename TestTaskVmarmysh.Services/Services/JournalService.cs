@@ -18,6 +18,11 @@ namespace TestTaskVmarmysh.Services.Services
         private readonly IJournalRepository _repository;
         private readonly ILogger<JournalService> _logger;
 
+        /// <summary>
+        /// Constructore of journal service.
+        /// </summary>
+        /// <param name="repository">Repository for access to journal.</param>
+        /// <param name="logger">Journal service logger.</param>
         public JournalService(IJournalRepository repository, ILogger<JournalService> logger)
         {
             _repository = repository;

@@ -21,7 +21,7 @@ namespace TestTaskVmarmysh.Services.Interfaces
         /// <param name="nodeName">New tree node name.</param>
         /// <param name="token">The cancellation token.</param>
         /// <returns>Create task.</returns>
-        Task Create(int parentNodeId, string nodeName, CancellationToken token);
+        Task Create(int? parentNodeId, string nodeName, CancellationToken token);
 
         /// <summary>
         /// Rename tree node.

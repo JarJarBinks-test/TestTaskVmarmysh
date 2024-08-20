@@ -2,6 +2,7 @@
 using TestTaskVmarmysh.Services.Interfaces;
 using TestTaskVmarmysh.Services.Services;
 using TestTaskVmarmysh.DataAccess;
+using Microsoft.Extensions.Configuration;
 
 namespace TestTaskVmarmysh.Services
 {
@@ -13,10 +14,11 @@ namespace TestTaskVmarmysh.Services
         /// <summary>
         /// Add services to services collections.
         /// </summary>
-        /// <param name="services"></param>
-        public static void AddServices(this IServiceCollection services)
+        /// <param name="services">Services collection.</param>
+        /// <param name="configuration">Configuration.</param>
+        public static void AddServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddRepositories();
+            services.AddRepositories(configuration);
             services.AddSingleton<IRequestIdStorage, RequestIdStorage>();
             services.AddScoped<IRequestIdService, RequestIdService>();
             services.AddScoped<ITreeService, TreeService>();

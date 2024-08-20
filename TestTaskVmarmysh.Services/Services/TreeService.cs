@@ -53,16 +53,15 @@ namespace TestTaskVmarmysh.Services.Services
                 };
             };
 
-            var resultViewItems = ConvertToViewRecursive(result);
-            return resultViewItems;
+            return ConvertToViewRecursive(result);
         }
 
         /// <inheritdoc />
-        public Task Create(int parentNodeId, string nodeName, CancellationToken token)
+        public Task Create(int? parentNodeId, string nodeName, CancellationToken token)
         {
             _logger.LogInformation($"{nameof(Create)}. {nameof(parentNodeId)}={parentNodeId}, {nameof(nodeName)}={nodeName}.");
 
-            if (parentNodeId <= 0)
+            if (parentNodeId.HasValue && parentNodeId <= 0)
             {
                 throw new WrongParameterException(nameof(parentNodeId));
             }

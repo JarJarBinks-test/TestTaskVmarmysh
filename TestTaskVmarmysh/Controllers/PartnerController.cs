@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using TestTaskVmarmysh.Services.Interfaces;
 
 namespace TestTaskVmarmysh.Controllers
@@ -30,7 +31,7 @@ namespace TestTaskVmarmysh.Controllers
         /// <param name="token">The cancellation token.</param>
         /// <returns>Remember me task.</returns>
         [HttpPost("api.user.partner.rememberMe")]
-        public Task RememberMe([FromQuery] string code, CancellationToken token)
+        public Task RememberMe([FromQuery, Required] string code, CancellationToken token)
         {
             _logger.LogInformation($"{nameof(RememberMe)}. {nameof(code)}={code}.");
 

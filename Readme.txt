@@ -1,0 +1,1 @@
+Only one method in each project tested - only for demonstrate.

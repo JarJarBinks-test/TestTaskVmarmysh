@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json;
 using TestTaskVmarmysh.Common.Pagging;
 using TestTaskVmarmysh.Services.Entities;
@@ -34,7 +35,7 @@ namespace TestTaskVmarmysh.Controllers
         /// <param name="token">The cancellation token.</param>
         /// <returns>Journal item view.</returns>
         [HttpPost("api.user.journal.getSingle")]
-        public Task<JournalItemView> GetSingle([FromQuery] int id, CancellationToken token)
+        public Task<JournalItemView> GetSingle([FromQuery, Required] int id, CancellationToken token)
         {
             _logger.LogInformation($"{nameof(GetSingle)}. {nameof(id)}={id}.");
 
@@ -50,7 +51,7 @@ namespace TestTaskVmarmysh.Controllers
         /// <param name="token">The cancellation token.</param>
         /// <returns>Paged result of items.</returns>
         [HttpPost("api.user.journal.getRange")]
-        public Task<PagedResult<JournalListItemView>> GetRange([FromQuery] int skip, [FromQuery] int take, [FromBody] RangeFilter filter, CancellationToken token)
+        public Task<PagedResult<JournalListItemView>> GetRange([FromQuery, Required] int skip, [FromQuery, Required] int take, [FromBody, Required] RangeFilter filter, CancellationToken token)
         {
             _logger.LogInformation($"{nameof(GetRange)}. {nameof(skip)}={skip}, {nameof(take)}={take}, {nameof(filter)}={JsonSerializer.Serialize(filter)}.");
 

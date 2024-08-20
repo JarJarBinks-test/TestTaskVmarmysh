@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel.DataAnnotations;
 using TestTaskVmarmysh.Services.Entities;
 using TestTaskVmarmysh.Services.Interfaces;
 
@@ -31,7 +32,7 @@ namespace TestTaskVmarmysh.Controllers
         /// <param name="token">The cancellation token.</param>
         /// <returns>Root tree node.</returns>
         [HttpPost("api.user.tree.get")]
-        public Task<TreeNodeView> Get([FromQuery] string treeName, CancellationToken token)
+        public Task<TreeNodeView> Get([FromQuery, Required] string treeName, CancellationToken token)
         {
             _logger.LogInformation($"{nameof(Get)}. {nameof(treeName)}={treeName}.");
 

@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using TestTaskVmarmysh.DataAccess.Entities.JournalEntities;
 
 namespace TestTaskVmarmysh.DataAccess.Context
@@ -10,8 +9,6 @@ namespace TestTaskVmarmysh.DataAccess.Context
     /// </summary>
     public class JournalContext : DbContext
     {
-        private readonly String _connectionString;
-
         /// <summary>
         /// Dbset for journal objects.
         /// </summary>
@@ -20,20 +17,10 @@ namespace TestTaskVmarmysh.DataAccess.Context
         /// <summary>
         /// Conscructor of <seealso cref="TestTaskVmarmysh.DataAccess.Context.JournalContext"/>.
         /// </summary>
-        /// <param name="configuration">Configuration provider.</param>
-        public JournalContext(IConfiguration configuration)
+        /// <param name="options">Configuration options.</param>
+        public JournalContext(DbContextOptions<JournalContext> options)
+            : base(options)
         {
-            _connectionString = configuration.GetConnectionString("JournalContextConnectionString")
-                ?? throw new Exception($"Connection string for {nameof(JournalContext)} not configured.");
-        }
-
-        /// <summary>
-        /// Configuration context method.
-        /// </summary>
-        /// <param name="optionsBuilder">The builder options.</param>
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer(_connectionString);
         }
     }
 }
